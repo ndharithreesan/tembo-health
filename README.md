@@ -16,21 +16,20 @@ Go here: https://nodejs.org/en/download/
 In your terminal, run the following from the project root:
 
 ```bash
+npm install
+npm run build
 npm run start
+```
+
+For development, run:
+
+```bash
+npm install
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Troubleshooting
-
-This app already came bundles with the node modules needed as well as a production build. In case you run into any
-errors,
-run the following in your terminal from the project root before starting the application:
-
-```bash
-npm install
-npm run build
-```
 
 ## Notes for Improvement
 
