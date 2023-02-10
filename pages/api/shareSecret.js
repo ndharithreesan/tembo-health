@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 
 /**
  * This function will read the secrets from our filesystem and check if a secret exists for the password supplied
@@ -15,11 +16,10 @@ function checkPassword(secrets, password) {
 }
 
 function saveSecret(password, secret, secrets) {
-    let filePath = path.join(process.cwd(), 'json') + '/secrets.json';
     secrets[password] = secret;
     let json = JSON.stringify(secrets);
     try {
-        fs.writeFileSync(filePath, json);
+        fs.writeFileSync(os.tmpdir() + '/tembo_secrets.json', json);
         return null;
     } catch (e) {
         return {
@@ -31,11 +31,13 @@ function saveSecret(password, secret, secrets) {
 
 function getSecrets() {
     //TODO: instead of using the filesystem to store secrets, we should connect to either a cache or database
-    //Find the absolute path of the json directory
-    const jsonDirectory = path.join(process.cwd(), 'json');
     //Read the json data file data.json
-    const fileContents = fs.readFileSync(jsonDirectory + '/secrets.json', 'utf8');
-    return JSON.parse(fileContents);
+    try {
+        const fileContents = fs.readFileSync(os.tmpdir() + '/tembo_secrets.json', 'utf8');
+        return JSON.parse(fileContents);
+    } catch (e) {
+        return {};
+    }
 }
 
 export default function handler(req, res) {
