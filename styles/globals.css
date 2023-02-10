@@ -1,0 +1,27 @@
+html {
+    height: 100vh;
+}
+
+body {
+    height: 100vh;
+}
+
+.container {
+    height: 100%;
+}
+
+#__next {
+    height: 100%
+}
+
+.homeButtons {
+    padding-right: 5px;
+}
+
+.homeText {
+    font-size: 2em;
+}
+
+.input {
+    margin-right: 5px;
+}
